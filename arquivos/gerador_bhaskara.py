@@ -13,25 +13,47 @@ def verificar_dizima(num):
 
 
 add = []
-x1 = x2 = cont = 0
-
-menorP, maiorP, quantV = -9, 9, 2
+x1 = x2 = contN = 0
+ 
 '''
 menorP = int(input('Menor número possivel: '))
 maiorP = int(input('Maior número possivel: '))
 quantV = int(input('Resultados com até quantos números após a virula? '))
 '''
-for a in range(menorP, maiorP + 1):
-    for b in range(menorP, maiorP + 1):
-        for c in range(menorP, maiorP + 1):
 
-            cont += 1
+nums = []
+
+menorP, maiorP, quantV = -9, 9, 2
+
+for c in range(menorP, maiorP):
+
+    cont = c
+    nums.append(cont)
+
+    for c2 in range(1, 100):
+
+        cont += 0.01
+        nums.append(round(cont, 2))
+
+nums.append(maiorP)
+
+zero = nums.index(0)
+numsA = nums[:]
+numsA.pop(zero)
+
+for a in numsA:
+    for b in nums:
+        for c in nums:
+            print(a, b, c)
+            contN += 1
 
             v = {'a': a, 'b': b, 'c': c, 'd': None, 'x1': 0, 'x2': 0}
 
             v['d'] = (v['b'])**2 -4 * v['a'] * v['c']
 
             raiz = verificar_raiz(v['d'])
+
+            v['d'] = round(v['d'], quantV)
 
             if raiz != None:
 
@@ -56,7 +78,8 @@ for a in range(menorP, maiorP + 1):
                     add.append(v)
 while True:
 
-    quest = input(f'Digite um valor de 0 a {len(add)}: ')
+    #quest = input(f'Digite um valor de 0 a {len(add)}: ')
+    quest = ''
 
     if quest == '':
         
@@ -80,7 +103,7 @@ while True:
 
             print(add[quest])
 
-local = f'arquivos/QeR/Menor {menorP} | Maior {maiorP} | PosVirg {quantV} | Tot {len(add)}'
+local = f'arquivos/QeR/Menor {menorP}_Maior {maiorP}_PosVirg {quantV}_Tot {len(add)}'
 
 os.makedirs(local, exist_ok=True)
 
@@ -94,4 +117,4 @@ for c in range(len(add)):
     perg.write(f'{c+1}) a = {add[c]["a"]} | b = {add[c]["b"]} | c = {add[c]["c"]}\n\n')
     resp.write(f'{c+1}) d = {add[c]["d"]} | x1 = {add[c]["x1"]} | x2 = {add[c]["x2"]}\n\n')
 
-print('Menor -9 | Maior 9 | PosVirg 2 | Tot 1021')
+print(contN, len(add))
