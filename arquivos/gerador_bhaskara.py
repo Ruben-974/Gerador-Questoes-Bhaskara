@@ -2,40 +2,34 @@ import os
 
 def verificar_raiz(delta):
 
-    if delta >= 0:
+    if delta > 0:
         return verificar_dizima(delta**0.5)
-  
+
 
 def verificar_dizima(num):
 
-    if num == round(num, quantV):
+    if num == round(num, config['AposVirgResult']):
         return num
 
 
-add = []
-x1 = x2 = contN = 0
- 
-'''
-menorP = int(input('Menor número possivel: '))
-maiorP = int(input('Maior número possivel: '))
-quantV = int(input('Resultados com até quantos números após a virula? '))
-'''
+add, nums, contN = [], [], 0
 
-nums = []
+config = {'MenorValor': -9, 'MaiorValor': 9, 'AposVirgValor': 0, 'AposVirgResult': 3}
 
-menorP, maiorP, quantV = -9, 9, 2
+FimDecimal = 10 ** config['AposVirgValor']
+Soma = 10 ** -config['AposVirgValor']
 
-for c in range(menorP, maiorP):
+for c in range(config['MenorValor'], config['MaiorValor']):
 
     cont = c
     nums.append(cont)
 
-    for c2 in range(1, 100):
+    for c2 in range(1, FimDecimal):
 
-        cont += 0.01
-        nums.append(round(cont, 2))
+        cont += Soma
+        nums.append(round(cont, config['AposVirgValor']))
 
-nums.append(maiorP)
+nums.append(config['MaiorValor'])
 
 zero = nums.index(0)
 numsA = nums[:]
@@ -53,7 +47,7 @@ for a in numsA:
 
             raiz = verificar_raiz(v['d'])
 
-            v['d'] = round(v['d'], quantV)
+            v['d'] = round(v['d'], config['AposVirgResult'])
 
             if raiz != None:
 
@@ -76,45 +70,15 @@ for a in numsA:
                 if None not in (v['x1'], v['x2']):
 
                     add.append(v)
-while True:
 
-    #quest = input(f'Digite um valor de 0 a {len(add)}: ')
-    quest = ''
-
-    if quest == '':
-        
-        break
-
-    try:
-
-        quest = int(quest)
-
-    except ValueError:
-
-        print('Digite um número!')
-
-    else:
-
-        if quest > len(add) or quest < 0:
-
-            print('Valor invalido!')
-
-        else:
-
-            print(add[quest])
-
-local = f'arquivos/QeR/Menor {menorP}_Maior {maiorP}_PosVirg {quantV}_Tot {len(add)}'
+local = f'arquivos/QeR/Menor {config["MenorValor"]}_Maior {config["MaiorValor"]}_AposVirgValor {config["AposVirgValor"]}_AposVirgResult {config["AposVirgResult"]}_Tot {len(add)}'
 
 os.makedirs(local, exist_ok=True)
 
 perg = open(f'{local}/Questões Bhaskara.txt', 'w')
 resp = open(f'{local}/Respostas Bhaskara.txt', 'w')
 
-print(os.getcwd())
-
 for c in range(len(add)):
 
     perg.write(f'{c+1}) a = {add[c]["a"]} | b = {add[c]["b"]} | c = {add[c]["c"]}\n\n')
     resp.write(f'{c+1}) d = {add[c]["d"]} | x1 = {add[c]["x1"]} | x2 = {add[c]["x2"]}\n\n')
-
-print(contN, len(add))
