@@ -12,9 +12,22 @@ def verificar_dizima(num):
         return num
 
 
-add, nums, contN = [], [], 0
+add, nums, contN, ok = [], [], 0, True
 
-config = {'MenorValor': -9, 'MaiorValor': 9, 'AposVirgValor': 0, 'AposVirgResult': 3}
+config = {'MenorValor': 9, 'MaiorValor': 5, 'AposVirgValor': 0, 'AposVirgResult': 3}
+
+for k, v in config.items():
+    if type(v) in (str, float):
+        if ok:
+            print('Os valores da configuração devem ser números inteiros!')
+        print(f'Confira o valor "{v}" no item "{k}"')
+        ok = False
+
+if ok is False:
+    exit()
+
+if config['MenorValor'] > config['MaiorValor']:
+    config['MenorValor'], config['MaiorValor'] = config['MaiorValor'], config['MenorValor']
 
 FimDecimal = 10 ** config['AposVirgValor']
 Soma = 10 ** -config['AposVirgValor']
@@ -31,9 +44,11 @@ for c in range(config['MenorValor'], config['MaiorValor']):
 
 nums.append(config['MaiorValor'])
 
-zero = nums.index(0)
 numsA = nums[:]
-numsA.pop(zero)
+
+if 0 in nums:
+    zero = nums.index(0)
+    numsA.pop(zero)
 
 for a in numsA:
     for b in nums:
