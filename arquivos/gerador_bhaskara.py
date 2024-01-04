@@ -14,7 +14,7 @@ def verificar_dizima(num):
 
 add, nums, contN, ok = [], [], 0, True # Criando variaveis
 
-config = {'MenorValor': -9, 'MaiorValor': 9, 'AposVirgValor': 2, 'AposVirgResult': 3} # Dicionario com as configurações
+config = {'MenorValor': 0, 'MaiorValor': 9, 'AposVirgValor': 1, 'AposVirgResult': 2} # Dicionario com as configurações
 
 for k, v in config.items():
 
@@ -109,3 +109,5 @@ for c in range(len(add)):
 
     perg.write(f'{c+1}) a = {add[c]["a"]} | b = {add[c]["b"]} | c = {add[c]["c"]}\n\n')
     resp.write(f'{c+1}) d = {add[c]["d"]} | x1 = {add[c]["x1"]} | x2 = {add[c]["x2"]}\n\n')
+
+print(local, '/Respostas Bhaskara.txt')
